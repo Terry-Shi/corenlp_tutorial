@@ -23,14 +23,22 @@ import edu.stanford.nlp.util.CoreMap;
 public class CoreNLPMain {
     
     public static void main(String[] args) {
-        // creates a StanfordCoreNLP object, with POS tagging, lemmatization,
+        long begin = System.currentTimeMillis();
+        process();
+        long end = System.currentTimeMillis();
+        
+        System.out.println("Total time: " + (end - begin));
+    }
+    
+    public static void process() {
+     // creates a StanfordCoreNLP object, with POS tagging, lemmatization,
         // NER, parsing, and coreference resolution
         Properties props = new Properties();
         props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse, dcoref");
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 
         // read some text in the text variable
-        String text = "Stanford University is located in California. It is a great university."; // Add your text here!
+        String text = "Stanford University is located in California. It is a great university. Meg is CEO of HP."; // Add your text here!
 
         // create an empty Annotation just with the given text
         Annotation document = new Annotation(text);
@@ -71,5 +79,4 @@ public class CoreNLPMain {
         Map<Integer, CorefChain> graph = document.get(CorefChainAnnotation.class);
         System.out.println(graph);
     }
-    
 }
