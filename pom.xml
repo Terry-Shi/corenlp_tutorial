@@ -10,6 +10,7 @@
   
   <dependencies>
     <!-- corenlp dependency BEGIN -->
+    <!-- 目前暂时使用3.4.1，因为3.5.0版本开始仅支持java-1.8及以上版本 -->
     <dependency>
       <groupId>edu.stanford.nlp</groupId>
       <artifactId>stanford-corenlp</artifactId>

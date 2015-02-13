@@ -20,6 +20,11 @@ import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.util.CoreMap;
 
+/**
+ * Ref: http://www.cnblogs.com/tec-vegetables/p/4153144.html
+ * @author shijie
+ *
+ */
 public class CoreNLPMain {
     
     public static void main(String[] args) {
@@ -38,7 +43,7 @@ public class CoreNLPMain {
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 
         // read some text in the text variable
-        String text = "Stanford University is located in California. It is a great university. Meg is CEO of HP."; // Add your text here!
+        String text = "Stanford University is located in California. It is a great university. Meg is CEO of HP. Tomorrow is a nice day!"; // Add your text here!
 
         // create an empty Annotation just with the given text
         Annotation document = new Annotation(text);
@@ -53,8 +58,8 @@ public class CoreNLPMain {
         for (CoreMap sentence : sentences) {
             // traversing the words in the current sentence
             // a CoreLabel is a CoreMap with additional token-specific methods
-            for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
-                // this is the text of the token  单词
+            for (CoreLabel token : sentence.get(TokensAnnotation.class)) { // TODO 还有哪些class? 
+                // this is the text of the token  拆分后的单词
                 String word = token.get(TextAnnotation.class);
                 // this is the POS tag of the token 词性：动词VBZ，副词,名词NNP，形容词JJ，冠词DT......
                 String pos = token.get(PartOfSpeechAnnotation.class);
