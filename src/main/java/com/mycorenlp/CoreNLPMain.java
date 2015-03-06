@@ -63,7 +63,7 @@ public class CoreNLPMain {
                 String word = token.get(TextAnnotation.class);
                 // this is the POS tag of the token 词性：动词VBZ，副词,名词NNP，形容词JJ，冠词DT......
                 String pos = token.get(PartOfSpeechAnnotation.class);
-                // this is the NER label of the token 命名实体。 例如：ORGANIZATION，O，LOCATION，DATE，TIME，PERSON
+                // this is the NER label of the token 命名实体。 例如：ORGANIZATION，O，LOCATION，DATE，TIME，PERSON 目的是识别语料中人名、地名、组织机构名等命名实体
                 String ne = token.get(NamedEntityTagAnnotation.class);
                 System.out.println("word = " + word + " pos = " + pos + " ne = " + ne);
             }
