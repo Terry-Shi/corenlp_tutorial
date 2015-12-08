@@ -18,6 +18,7 @@ import edu.stanford.nlp.pipeline.SentimentAnnotator;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.semgraph.SemanticGraph;
 import edu.stanford.nlp.sentiment.SentimentCoreAnnotations;
+import edu.stanford.nlp.sentiment.SentimentCoreAnnotations.SentimentAnnotatedTree;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.util.CoreMap;
@@ -84,7 +85,7 @@ public class CoreNLPMain {
             
             // 情感分析
             Tree treeSentiment = sentence
-                    .get(SentimentCoreAnnotations.AnnotatedTree.class);
+                    .get(SentimentAnnotatedTree.class);
             int sentiment = RNNCoreAnnotations.getPredictedClass(treeSentiment);
             System.out.println(printSentiment(sentiment));
             System.out.println("--------------------- End of one sentence--------------------------");

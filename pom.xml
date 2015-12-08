@@ -10,18 +10,18 @@
   
   <dependencies>
     <!-- corenlp dependency BEGIN -->
-    <!-- 目前暂时使用3.4.1，因为3.5.0版本开始仅支持java-1.8及以上版本 -->
-    <!-- 如果需要JDK 8 windows版本 从以下地址下载 http://www.azulsystems.com/products/zulu/downloads#Windows -->
+    <!-- 如果只能用JDK7 则需要依赖CoreNLP3.4.1， 因为3.5.0版本开始仅支持JDK8及以上版本 -->
+    <!-- 如果需要JDK8 windows版本 从以下地址下载 http://www.azulsystems.com/products/zulu/downloads#Windows -->
     <dependency>
       <groupId>edu.stanford.nlp</groupId>
       <artifactId>stanford-corenlp</artifactId>
-      <version>3.5.1</version>
+      <version>3.5.2</version>
     </dependency>
   
     <dependency>
       <groupId>edu.stanford.nlp</groupId>
       <artifactId>stanford-corenlp</artifactId>
-      <version>3.5.1</version>
+      <version>3.5.2</version>
       <classifier>models</classifier>
     </dependency>
     <!-- corenlp dependency END -->
