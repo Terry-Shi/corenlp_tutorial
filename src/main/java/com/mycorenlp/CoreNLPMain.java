@@ -41,6 +41,7 @@ public class CoreNLPMain {
     public static void process() {
         // creates a StanfordCoreNLP object, with POS tagging, lemmatization, NER, parsing, and coreference resolution
         Properties props = new Properties();
+        // tokenize: 分词；ssplit:分句；pos:词性标注；lemma:获取词原型；parse:句法解析（含依存句法）；dcoref:同义指代； sentiment 情感分析
         props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse, dcoref, sentiment");
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 
@@ -61,11 +62,12 @@ public class CoreNLPMain {
         // a CoreMap is essentially a Map that uses class objects as keys and has values with custom types
         List<CoreMap> sentences = document.get(SentencesAnnotation.class);
 
+        // 遍历所有句子，输出每一句的处理结果  
         for (CoreMap sentence : sentences) {
             System.out.println("--------------------- Begin of one sentence--------------------------");
             System.out.println(sentence.toString());
             
-            // traversing the words in the current sentence
+            // 遍历每一个词traversing the words in the current sentence
             // a CoreLabel is a CoreMap with additional token-specific methods
             for (CoreLabel token : sentence.get(TokensAnnotation.class)) { // TODO 还有哪些class? 
                 // this is the text of the token  拆分后的单词
@@ -79,7 +81,7 @@ public class CoreNLPMain {
 //            // this is the parse tree of the current sentence
 //            Tree treeAnnotation = sentence.get(TreeAnnotation.class);
 //            System.out.println("TreeAnnotation = " + treeAnnotation);
-//            // this is the Stanford dependency graph of the current sentence
+//            // 先获取当前句子的依存句法分析结果this is the Stanford dependency graph of the current sentence
 //            SemanticGraph dependencies = sentence
 //                    .get(CollapsedCCProcessedDependenciesAnnotation.class);
             
