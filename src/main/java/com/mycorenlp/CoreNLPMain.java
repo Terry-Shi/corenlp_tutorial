@@ -22,9 +22,10 @@ import edu.stanford.nlp.sentiment.SentimentCoreAnnotations.SentimentAnnotatedTre
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.util.CoreMap;
+import edu.stanford.nlp.util.StringUtils;
 
 /**
- * Ref: http://www.cnblogs.com/tec-vegetables/p/4153144.html
+ * Ref: http://stanfordnlp.github.io/CoreNLP/api.html
  * @author shijie
  *
  */
@@ -39,22 +40,27 @@ public class CoreNLPMain {
     }
     
     public static void process() {
+        // 中文处理需要添加配置文件
+        String[] args = new String[] {"-props", "StanfordCoreNLP-chinese.properties"
+                //"edu/stanford/nlp/hcoref/properties/zh-coref-default.properties"  // 中文指代消解
+                };
+        
         // creates a StanfordCoreNLP object, with POS tagging, lemmatization, NER, parsing, and coreference resolution
-        Properties props = new Properties();
+        //Properties props = new Properties();
         // tokenize: 分词；ssplit:分句；pos:词性标注；lemma:获取词原型；parse:句法解析（含依存句法）；dcoref:同义指代； sentiment 情感分析
-        props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse, dcoref, sentiment");
+        //props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse, dcoref, sentiment");
+        Properties props = StringUtils.argsToProperties(args);
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 
         // read some text in the text variable
-        String text = "Stanford University is located in California. It is a great university. Meg is the 2nd female CEO of HP! This is a great PC. This PC is not so good after all!"; // Add your text here!
-
+        //String text = "Stanford University is located in California. It is a great university. Meg is the 2nd female CEO of HP! This is a great PC. This PC is not so good after all! 今天天气真好。"; // Add your text here!
+        String text = "一些盗版制品经营者为了应付和躲避打击，经营手法更为隐蔽。";
         //  approach 1
         Annotation  document = pipeline.process(text);
         
         // approach 2
 //        // create an empty Annotation just with the given text
 //        Annotation document = new Annotation(text);
-//
 //        // run all Annotators on this text
 //        pipeline.annotate(document);
 
@@ -85,7 +91,7 @@ public class CoreNLPMain {
 //            SemanticGraph dependencies = sentence
 //                    .get(CollapsedCCProcessedDependenciesAnnotation.class);
             
-            // 情感分析
+            // 情感分析（不支持中文）
             Tree treeSentiment = sentence
                     .get(SentimentAnnotatedTree.class);
             int sentiment = RNNCoreAnnotations.getPredictedClass(treeSentiment);
@@ -100,7 +106,6 @@ public class CoreNLPMain {
         // coreference 表示指代关系
         Map<Integer, CorefChain> graph = document.get(CorefChainAnnotation.class);
         System.out.println(graph);
-        
     }
     
     
